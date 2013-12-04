@@ -1,0 +1,243 @@
+// Created: @karstenrowe 20-20-2013
+// Project: @karstenrowe bootstrap framework
+
+// import bootstrap
+@import "bootstrap.less";
+
+
+/* ============================ */
+/* = font = */
+/* ============================ */
+@headline-font: 'Crete Round', serif; // 400
+@body-font: 'Lato', sans-serif; // 400, 700, 400italic
+
+@big: 17px; // line-height: 23px;
+@normal: 15px; // line-height: 21px;
+@small: 13px; // line-height: 16px;
+@tiny: 11px;
+/* ============================ */
+
+
+/* ============================ */
+/* = color = */
+/* ============================ */
+@brand-dk: #0a46aa; // blue
+@brand: #4285f4; // base brand color
+@brand-lt: #dae8ff;
+
+@grey-dk: #2a2a2c; // cool grey
+@grey: #5d5f63; // base text color
+@grey-lt: #cccfd3;
+
+@off-white: #f1f3f6; // base color
+/* ============================ */
+
+
+/* ============================ */
+/* = selection color = */
+/* ============================ */
+::-moz-selection {
+  text-shadow: none;
+	color: @brand-dk;
+  background: @brand-lt;
+}
+::selection {
+  text-shadow: none;
+	color: @brand-dk;
+  background: @brand-lt;
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = toolbox = */
+/* ============================ */
+// retina mixin
+@highdpi: ~"(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)";
+
+.2x(@path, @position, @w: auto, @h: auto) {
+	background-image: url(@path);
+	background-repeat: ~"@{position}";
+	@at2x_path: ~`"@{path}".split('.').slice(0, "@{path}".split('.').length - 1).join(".") + "_2x" + "." + "@{path}".split('.')["@{path}".split('.').length - 1]`;
+
+	@media @highdpi {
+		background-image: url(@at2x_path);
+		background-repeat: ~"@{position}";
+		background-size: @w @h;
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = framework = */
+/* ============================ */
+body {
+	font-family: @body-font;
+	font-size: @normal;
+	font-weight: normal;
+	line-height: 21px;
+	color: @grey;
+	background: @off-white;
+  min-height: 740px; // forces scroll so fixed navigation is noticeable on shorter pages
+  padding-top: 100px;
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = typography = */
+/* ============================ */
+h1,
+h2,
+h3 {
+	font-family: @headline-font;
+	line-height: 40px;
+}
+h4,
+h5,
+h6 {
+	font-family: @body-font;
+	font-weight: bold;
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = common elements = */
+/* ============================ */
+body {
+	// links
+	a {
+		color: @brand;
+		&:hover {
+			color: @brand-dk;
+		}
+		&:active {
+			color: @grey-dk;
+		}
+	}
+	// buttons
+	.btn-primary {
+		text-shadow: 0 1px 1px rgba(0,0,0, 0.15);
+	  color: #fff;
+	  background-color: @brand;
+	  box-shadow: inset 0 1px 1px rgba(255,255,255, 0.35), 0 1px 1px rgba(0,0,0, 0.2);
+	  border-color: @brand-dk;
+		&:hover {
+			text-shadow: 0 1px 1px rgba(0,0,0, 0.6);
+			color: @off-white;
+		  box-shadow: inset 0 0px 0px 1px rgba(255,255,255, 0.15), 0 1px 1px rgba(0,0,0, 0.3);
+		  background-color: darken(@brand,10%);
+		  border-color: darken(@brand-dk, 20%);
+		}
+		&:active {
+			text-shadow: 0 -1px 1px rgba(0,0,0, 0.3);
+			background-color: @brand;
+		  box-shadow: inset 0 1px 3px rgba(0,0,0, 0.2), 0 1px 1px rgba(255,255,255, 0.5);
+			box-shadow: none;
+		  border-color: @brand-dk;
+		}
+	}
+	// remove webkit blue glow on focus
+	button,
+	input:focus,
+	textarea:focus {
+	  outline: none;
+	}
+}
+/* ============================ */
+
+/* ============================ */
+/* = navigation = */
+/* ============================ */
+.navbar {
+	background: #fff;
+	border-color: @grey-lt;
+	padding: 0 15px;
+
+	li {
+		// these styles override theme colors
+		&.active {
+			a {
+				color: @brand !important;
+				background-color: @off-white !important;
+			}
+		}
+		a:hover {
+			color: @brand !important;
+		}
+	}
+	.dropdown-menu {
+		li {
+			&:hover,
+			&.active {
+
+				a { // these styles override theme colors
+					color: @brand !important;
+					background-color: @off-white !important;
+				}
+			}
+		}
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = branding = */
+/* ============================ */
+// logo
+.navbar-brand {
+	text-indent: -9999px; // shunt actual text off the page, replace with logo-nav.pngx
+	.2x('../img/brand/logo-nav.png', "no-repeat", 115px, 31px);
+	background-position: 0 50%;
+	&:hover {
+		opacity: 0.9;
+	}
+}
+/* ============================ */
+
+
+/* ============================ */
+/* = patterns = */
+/* ============================ */
+.container {
+	text-shadow: 0 1px 1px rgba(255,255,255, 0.5);
+	// page title
+	h1 {
+		text-align: center;
+		margin: 0 0 34px 0;
+	}
+	// containers
+	.jumbotron {
+		background-color: #fff;
+		border: 1px solid @grey-lt;
+		h2 {
+			font-size: 28px;
+			font-style: italic;
+			line-height: 36px;
+			color: @brand-dk;
+			margin: 0 0 14px 0;
+		}
+		.btn-primary {
+			margin: 12px 8px 0 0;
+		}
+	}
+	.footer {
+		font-size: @tiny;
+		color: lighten(@grey, 40%);
+		margin: 20px 0 30px;
+		padding: 20px 0;
+		span {
+			margin: 0 2px;
+		}
+		.left {
+			float: left;
+		}
+		.right {
+			float: right;
+		}
+	}
+}
+/* ============================ */
